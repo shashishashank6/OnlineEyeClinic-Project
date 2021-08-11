@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,18 @@ public class DoctorController {
 			Doctor doctor=ds.viewDoctor(doctorId);
 			if(doctor==null) {
 				return new ResponseEntity("Sorry! doctor not found!", 
+						HttpStatus.NOT_FOUND);
+			}
+			
+			return new ResponseEntity<Doctor>(doctor, HttpStatus.OK);
+		}
+	 @SuppressWarnings({ "rawtypes", "unchecked" })
+	    @DeleteMapping("/doctors/{doctorId}")
+		public ResponseEntity<Doctor> deleteDoctor(
+				@PathVariable("doctorId")Integer doctorId){
+			Doctor doctor= ds.deleteDoctor(doctorId);
+			if(doctor==null) {
+				return new ResponseEntity("Sorry! doctor not available!", 
 						HttpStatus.NOT_FOUND);
 			}
 			

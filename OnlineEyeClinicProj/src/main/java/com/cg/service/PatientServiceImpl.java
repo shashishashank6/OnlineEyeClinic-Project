@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import com.cg.dao.IAppointmentRepo;
 //import com.cg.dao.IAppointmentRepo;
 import com.cg.dao.IPatientRepo;
+import com.cg.dao.IReportRepo;
 import com.cg.model.Appointment;
 //import com.cg.model.Appointment;
 import com.cg.model.Patient;
+import com.cg.model.Report;
 
 @Service
 public class PatientServiceImpl implements IPatientService {
@@ -27,6 +29,8 @@ public class PatientServiceImpl implements IPatientService {
 	private IAppointmentRepo  appointRepo;
 	//@PersistenceContext
 	//private EntityManager em;
+	@Autowired
+	private IReportRepo reportRepo;
 
 	@Override
 	public List<Patient> viewAllPatients() {
@@ -74,5 +78,11 @@ public class PatientServiceImpl implements IPatientService {
 	public List<Appointment> viewAppointmentsByPatient(int patientId) {
 		// TODO Auto-generated method stub
 		return appointRepo.findAllAppointmentsByPatientId(patientId);
+	}
+
+	@Override
+	public List<Report> viewReportsByPatient(int patientId) {
+		// TODO Auto-generated method stub
+		return reportRepo.findReportByPatient(patientId); 
 	}	
 }

@@ -1,6 +1,6 @@
 package com.cg.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,13 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+//import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+//import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @Entity
 public class Report {
@@ -28,10 +23,8 @@ public class Report {
 	@Column(name="REPORT_ID")
 private int reportId;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
-	@JsonDeserialize(using = LocalDateDeserializer.class)
-	@JsonSerialize(using = LocalDateSerializer.class)
 	@Column(name="DATE_OF_REPORT")
-private LocalDate dateOfReport;
+private Date dateOfReport;
 	@Column(name="DESCRIPTION_OF_REPORT")
 private String description;
 	@Column(name="visual_Acuity")
@@ -40,10 +33,10 @@ private String visualAcuity;
 private String visualAcuityForNear;
 	@Column(name="visual_Acuity_For_Distance")
 private String visualAcuityForDistance;
-	@OneToOne(cascade=CascadeType.ALL,orphanRemoval = true)
+	@OneToOne
 	@JoinColumn(name="patient_Id")
 private Patient patient;
-	@OneToOne(cascade=CascadeType.ALL,orphanRemoval = true)
+	@OneToOne
 	@JoinColumn(name="test_Id")
 private Test test;
 	
@@ -53,10 +46,10 @@ private Test test;
 	public void setReportId(int reportId) {
 		this.reportId = reportId;
 	}
-	public LocalDate getDateOfReport() {
+	public Date getDateOfReport() {
 		return dateOfReport;
 	}
-	public void setDateOfReport(LocalDate dateOfReport) {
+	public void setDateOfReport(Date dateOfReport) {
 		this.dateOfReport = dateOfReport;
 	}
 	public String getDescription() {
@@ -87,14 +80,14 @@ private Test test;
 		return test;
 	}
 	
-	public Object getPatient() {
+	public Patient getPatient() {
 	
-		return patient.selectedProperties();
+	 return patient;
 		//return new Patient(patient.getPatientId(),patient.getPatientName(),patient.getPatientAge(),patient.getPatientMobile(),
 		//patient.getPatientEmail(),patient.getPatientAddress()
 			//	);
 	}
-	public Report(int reportId, LocalDate dateOfReport, String description, String visualAcuity,
+	public Report(int reportId, Date dateOfReport, String description, String visualAcuity,
 			String visualAcuityForNear, String visualAcuityForDistance, Patient patient, Test test) {
 		super();
 		this.reportId = reportId;

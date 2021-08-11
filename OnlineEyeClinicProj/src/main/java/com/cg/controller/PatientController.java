@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.model.Appointment;
 import com.cg.model.Patient;
+import com.cg.model.Report;
 import com.cg.service.IPatientService;
 
 @RestController
@@ -104,5 +105,17 @@ public class PatientController {
 		}
 		
 		return new ResponseEntity<List<Appointment>>(appoint, HttpStatus.OK);
+	}
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @GetMapping("/getReports/{patientId}")
+	public ResponseEntity<List<Report>> findReportsByPatient(
+			@PathVariable("patientId")Integer patientId){
+		List<Report> report= ps.viewReportsByPatient(patientId);
+		if(report.isEmpty()) {
+			return new ResponseEntity("Sorry! reports not found!", 
+					HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Report>>(report, HttpStatus.OK);
 	}
 }

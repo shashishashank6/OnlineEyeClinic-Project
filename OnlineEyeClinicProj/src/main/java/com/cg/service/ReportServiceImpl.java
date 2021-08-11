@@ -1,6 +1,7 @@
 package com.cg.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,36 +20,31 @@ public class ReportServiceImpl implements IReportService {
 	@Autowired
 	private IReportRepo reportRepo;
 	
-	@Autowired 
-	private IPatientRepo patientRepo;
-	
-	@Autowired
-	private ITestRepo testRepo;
+
 
 	@Override
-	public Report addReport(int patientId, int testId, Report report) {
+	public Report addReport(Report report) {
 		// TODO Auto-generated method stub
-		Patient patient=new Patient();
-		Test test=new Test();
-		List<Report> reportList=new ArrayList<Report>();
-		patient=patientRepo.getById(patientId);
-		test=testRepo.getById(testId);
+		//patient=patientRepo.getById(patientId);
+		//test=testRepo.getById(testId);
 		//report.setPatient(patient);
 		//report.setTest(test);
-		reportList.add(report);
-		return report;
+		
+	     return reportRepo.saveAndFlush(report);
 	}
 
 	@Override
 	public Report updateReport(Report report) {
 		// TODO Auto-generated method stub
-		return null;
+		return reportRepo.saveAndFlush(report);
 	}
 
 	@Override
 	public Report removeReport(int reportId) {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<Report> r=reportRepo.findById(reportId);
+		reportRepo.deleteById(reportId);
+		return r.get();
 	}
 
 	@Override
@@ -60,9 +56,9 @@ public class ReportServiceImpl implements IReportService {
 	}
 
 	@Override
-	public List<Report> viewReportsByDate(String date) {
+	public List<Report> viewReportsByDate(Date date) {
 		// TODO Auto-generated method stub
-		return null;
+		return reportRepo.findReportsByDate(date);
 	}
 	
 }

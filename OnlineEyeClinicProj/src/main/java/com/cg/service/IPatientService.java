@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.cg.model.Appointment;
 //import com.cg.model.Appointment;
 import com.cg.model.Patient;
+import com.cg.model.Report;
 
 @Service
 public interface IPatientService{
@@ -17,4 +18,5 @@ public interface IPatientService{
 	public Patient updatePatient(Patient patient);
 	public Patient viewPatient(int patientId);
 	public List<Appointment> viewAppointmentsByPatient(int patientId);
+	public List<Report> viewReportsByPatient(int patientId);
 }
