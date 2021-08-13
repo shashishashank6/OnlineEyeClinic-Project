@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.Exceptions.DoctorIdNotFoundException;
+import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.model.Appointment;
 import com.cg.model.Doctor;
 import com.cg.model.Patient;
@@ -38,10 +40,10 @@ public class DoctorController {
 	}
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 		@PostMapping("/doctors")
-		public ResponseEntity<Doctor> InsertDoctor(@RequestBody Doctor doctor){
+		public ResponseEntity<Doctor> InsertDoctor(@RequestBody Doctor doctor)throws UserNameAlreadyExistException{
 		  Doctor doctors= ds.addDoctor(doctor);
 			if(doctors==null) {
-				return new ResponseEntity("Sorry! doctors not found!", 
+				return new ResponseEntity("Sorry! doctor not inserted!", 
 						HttpStatus.NOT_FOUND);
 			}
 			
@@ -52,7 +54,7 @@ public class DoctorController {
 		public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor){
 			Doctor doctors= ds.updateDoctor(doctor);
 			if(doctors==null) {
-				return new ResponseEntity("Sorry! doctor not found!", 
+				return new ResponseEntity("Sorry! doctor not updated!", 
 						HttpStatus.NOT_FOUND);
 			}
 			
@@ -60,7 +62,7 @@ public class DoctorController {
 		}
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 		@GetMapping("/doctors/{doctorId}")
-		public ResponseEntity<Doctor> findDoctor(@PathVariable("doctorId")Integer doctorId){
+		public ResponseEntity<Doctor> findDoctor(@PathVariable("doctorId")Integer doctorId)throws DoctorIdNotFoundException{
 			Doctor doctor=ds.viewDoctor(doctorId);
 			if(doctor==null) {
 				return new ResponseEntity("Sorry! doctor not found!", 
@@ -72,7 +74,7 @@ public class DoctorController {
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 	    @DeleteMapping("/doctors/{doctorId}")
 		public ResponseEntity<Doctor> deleteDoctor(
-				@PathVariable("doctorId")Integer doctorId){
+				@PathVariable("doctorId")Integer doctorId)throws DoctorIdNotFoundException{
 			Doctor doctor= ds.deleteDoctor(doctorId);
 			if(doctor==null) {
 				return new ResponseEntity("Sorry! doctor not available!", 
@@ -83,10 +85,10 @@ public class DoctorController {
 		}
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 		@GetMapping("/getAppointments/{doctorId}")
-		public ResponseEntity<List<Appointment>> viewAppointments(@PathVariable("doctorId")Integer doctorId){
+		public ResponseEntity<List<Appointment>> viewAppointments(@PathVariable("doctorId")Integer doctorId)throws DoctorIdNotFoundException{
 			List<Appointment> appoint=ds.viewAllAppointmentsByDoctorId(doctorId);
 			if(appoint.isEmpty()) {
-				return new ResponseEntity("Sorry! doctors not found!", 
+				return new ResponseEntity("Sorry! appointments not found!", 
 						HttpStatus.NOT_FOUND);
 			}
 			

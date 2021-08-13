@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.Exceptions.AppointmentIdNotFoundException;
 import com.cg.model.Appointment;
 import com.cg.model.Patient;
 import com.cg.service.IAppointmentService;
@@ -30,7 +31,7 @@ public class AppointmentController {
 	public ResponseEntity<List<Appointment>> getAllAppointment(){
 		List<Appointment> appointment= as.viewAllAppointments();
 		if(appointment.isEmpty()) {
-			return new ResponseEntity("Sorry! appointment not found!", 
+			return new ResponseEntity("Sorry! appointments not found!", 
 					HttpStatus.NOT_FOUND);
 		}
 		
@@ -41,7 +42,7 @@ public class AppointmentController {
 	public ResponseEntity<Appointment> insertAppointment(@RequestBody Appointment appoint){
 		Appointment appointment= as.bookAppointment(appoint);
 		if(appointment==null) {
-			return new ResponseEntity("Sorry! appointment not found!", 
+			return new ResponseEntity("Sorry! appointment not inserted!", 
 					HttpStatus.NOT_FOUND);
 		}
 		
@@ -49,7 +50,7 @@ public class AppointmentController {
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping("/appointments/id/{appointmentId}")
-	public ResponseEntity<Appointment> viewAppointment(@PathVariable("appointmentId") Integer appointmentId){
+	public ResponseEntity<Appointment> viewAppointment(@PathVariable("appointmentId") Integer appointmentId)throws AppointmentIdNotFoundException{
 		Appointment appointment= as.viewAppointment(appointmentId);
 		if(appointment==null) {
 			return new ResponseEntity("Sorry! appointment not found!", 
@@ -61,7 +62,7 @@ public class AppointmentController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
     @DeleteMapping("/appointments/{appointmentId}")
 	public ResponseEntity<Appointment> deleteAppointment(
-			@PathVariable("appointmentId")Integer appointmentId){
+			@PathVariable("appointmentId")Integer appointmentId)throws AppointmentIdNotFoundException{
 		Appointment appointment= as.cancelAppointment(appointmentId);
 		if(appointment==null) {
 			return new ResponseEntity("Sorry! appointment not found!", 
@@ -76,7 +77,7 @@ public class AppointmentController {
 			@RequestBody Appointment appoint){
 		Appointment appointment= as.updateAppointment(appoint);
 		if(appointment==null) {
-			return new ResponseEntity("Sorry! appointment not found!", 
+			return new ResponseEntity("Sorry! appointment not updated!", 
 					HttpStatus.NOT_FOUND);
 		}
 		

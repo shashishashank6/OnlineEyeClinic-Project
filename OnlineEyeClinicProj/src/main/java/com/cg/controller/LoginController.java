@@ -5,9 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.model.Admin;
+import com.cg.model.Doctor;
+import com.cg.model.Patient;
 import com.cg.service.ILoginService;
 
 @RestController
@@ -15,19 +19,19 @@ import com.cg.service.ILoginService;
 public class LoginController {
 	@Autowired
 private ILoginService ls;
-	@GetMapping("/admin/{username}/{password}")
-	public ResponseEntity<String> adminLogin(@PathVariable String username,@PathVariable String password)
+	@GetMapping("/admin")
+	public ResponseEntity<String> adminLogin(@RequestBody Admin admin)
 	{
-		return new ResponseEntity<String>(ls.adminLogin(username, password),HttpStatus.OK);
+		return new ResponseEntity<String>(ls.adminLogin(admin.getAdminUserName(),admin.getAdminPassword()),HttpStatus.OK);
 	}
-	@GetMapping("/doctor/{username}/{password}")
-	public ResponseEntity<String> doctorLogin(@PathVariable String username,@PathVariable String password)
+	@GetMapping("/doctor")
+	public ResponseEntity<String> doctorLogin(@RequestBody  Doctor doctor)
 	{
-		return new ResponseEntity<String>(ls.doctorLogin(username, password),HttpStatus.OK);
+		return new ResponseEntity<String>(ls.doctorLogin(doctor.getDoctorUserName(),doctor.getDoctorPassword()),HttpStatus.OK);
 	}
-	@GetMapping("/patient/{username}/{password}")
-	public ResponseEntity<String> patientLogin(@PathVariable String username,@PathVariable String password)
+	@GetMapping("/patient")
+	public ResponseEntity<String> patientLogin(@RequestBody Patient patient)
 	{
-		return new ResponseEntity<String>(ls.patientLogin(username, password),HttpStatus.OK);
+		return new ResponseEntity<String>(ls.patientLogin(patient.getPatientUserName(),patient.getPatientPassword()),HttpStatus.OK);
 	}
 }

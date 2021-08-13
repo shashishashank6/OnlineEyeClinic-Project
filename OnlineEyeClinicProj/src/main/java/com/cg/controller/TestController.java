@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.Exceptions.DoctorIdNotFoundException;
+import com.cg.Exceptions.TestIdNotFoundException;
 import com.cg.model.Appointment;
 import com.cg.model.Test;
 import com.cg.service.ITestService;
@@ -40,7 +42,7 @@ public class TestController {
 	public ResponseEntity<Test> InsertTest(@RequestBody Test tests){
 		Test test= ts.addTest(tests);
 		if(test==null) {
-			return new ResponseEntity("Sorry! tests not found!", 
+			return new ResponseEntity("Sorry! tests not inserted!", 
 					HttpStatus.NOT_FOUND);
 		}
 		
@@ -49,7 +51,7 @@ public class TestController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @DeleteMapping("/tests/{testId}")
 	public ResponseEntity<Test> deleteTest(
-			@PathVariable("testId")Integer testId){
+			@PathVariable("testId")Integer testId)throws TestIdNotFoundException{
 		Test tests= ts.removeTest(testId);
 		if(tests==null) {
 			return new ResponseEntity("Sorry! tests not found!", 
@@ -62,7 +64,7 @@ public class TestController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @GetMapping("/tests/{testId}")
 	public ResponseEntity<Test> findTest(
-			@PathVariable("testId")Integer testId){
+			@PathVariable("testId")Integer testId)throws TestIdNotFoundException{
 		Test test= ts.viewTest(testId);
 		if(test==null) {
 			return new ResponseEntity("Sorry! tests not found!", 
@@ -86,7 +88,7 @@ public class TestController {
 	}
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping("/getTests/{doctorId}")
-	public ResponseEntity<List<Test>> viewTests(@PathVariable("doctorId")Integer doctorId){
+	public ResponseEntity<List<Test>> viewTests(@PathVariable("doctorId")Integer doctorId)throws DoctorIdNotFoundException{
 		List<Test> doc=ts.viewTestsByDoctor(doctorId);
 		if(doc.isEmpty()) {
 			return new ResponseEntity("Sorry! tests not found!", 

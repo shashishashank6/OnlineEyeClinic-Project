@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.Exceptions.AdminIdNotFoundException;
+import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.model.Admin;
 import com.cg.model.Test;
 import com.cg.service.IAdminService;
@@ -37,7 +39,7 @@ public class AdminController {
 	}
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping("/insert")
-	public ResponseEntity<Admin> InsertAdmin(@RequestBody Admin admin){
+	public ResponseEntity<Admin> InsertAdmin(@RequestBody Admin admin) throws UserNameAlreadyExistException{
 	 Admin admins= as.addAdmin(admin);
 		if(admins==null) {
 			return new ResponseEntity("Sorry! admin not inserted!", 
@@ -48,8 +50,8 @@ public class AdminController {
 	}
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @DeleteMapping("/delete/{adminId}")
-	public ResponseEntity<Admin> deleteAdmin(
-			@PathVariable("adminId")Integer adminId){
+	public ResponseEntity<Admin> deleteAdmin (
+			@PathVariable("adminId")Integer adminId)throws  AdminIdNotFoundException{
 		Admin admin=as.removeAdmin(adminId);
 		if(admin==null) {
 			return new ResponseEntity("Sorry! admin not found!", 
@@ -62,7 +64,7 @@ public class AdminController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @GetMapping("/viewAdmin/{adminId}")
 	public ResponseEntity<Admin> findAdmin(
-			@PathVariable("adminId")Integer adminId){
+			@PathVariable("adminId")Integer adminId)throws AdminIdNotFoundException{
 		Admin admin=as.viewAdmin(adminId);
 		if(admin==null) {
 			return new ResponseEntity("Sorry! admin not found!", 

@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.Exceptions.AppointmentIdNotFoundException;
 import com.cg.dao.IAppointmentRepo;
 import com.cg.model.Appointment;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -35,17 +37,19 @@ public class AppointmentServiceImpl implements IAppointmentService{
 
 
 	@Override
-	public Appointment cancelAppointment(int appointmentId) {
+	public Appointment cancelAppointment(int appointmentId)throws AppointmentIdNotFoundException {
 		// TODO Auto-generated method stub
-	     Optional<Appointment> appoint=appointRepo.findById(appointmentId);
+		Supplier<AppointmentIdNotFoundException> supplier=()-> new AppointmentIdNotFoundException("No appointment is available with the given id");
+	     Optional<Appointment> appoint=Optional.ofNullable(appointRepo.findById(appointmentId).orElseThrow(supplier));
 	     appointRepo.deleteById(appointmentId);
 	     return appoint.get();
 	}
 
 	@Override
-	public Appointment viewAppointment(int appointmentId) {
+	public Appointment viewAppointment(int appointmentId)throws AppointmentIdNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<Appointment> appoint=appointRepo.findById(appointmentId);
+		Supplier<AppointmentIdNotFoundException> supplier=()-> new AppointmentIdNotFoundException("No appointment is available with the given id");
+		Optional<Appointment> appoint=Optional.ofNullable(appointRepo.findById(appointmentId).orElseThrow(supplier));
 		return appoint.get();
 	}
 	

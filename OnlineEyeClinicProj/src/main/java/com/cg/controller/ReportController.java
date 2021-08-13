@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.Exceptions.ReportIdNotFoundException;
 import com.cg.model.Doctor;
 import com.cg.model.Report;
+import com.cg.model.Spectacles;
 import com.cg.model.Test;
 import com.cg.service.IReportService;
 
@@ -31,7 +33,7 @@ public class ReportController {
 	public ResponseEntity<Report> InsertReport(@RequestBody Report report){
 		Report reports= rs.addReport(report);
 		if(reports==null) {
-			return new ResponseEntity("Sorry! report not found!", 
+			return new ResponseEntity("Sorry! report not inserted!", 
 					HttpStatus.NOT_FOUND);
 		}
 		
@@ -39,7 +41,7 @@ public class ReportController {
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping("/reports/{reportId}")
-	public ResponseEntity<Report> findReport(@PathVariable("reportId")Integer reportId){
+	public ResponseEntity<Report> findReport(@PathVariable("reportId")Integer reportId)throws ReportIdNotFoundException{
 		Report report=rs.viewReport(reportId);
 		if(report==null) {
 			return new ResponseEntity("Sorry! report not found!", 
@@ -64,7 +66,7 @@ public class ReportController {
 	public ResponseEntity<Report> updateReport(@RequestBody Report report){
 		Report reports=rs.updateReport(report);
 		if(reports==null) {
-			return new ResponseEntity("Sorry! reports not found!", 
+			return new ResponseEntity("Sorry! reports not updated!", 
 					HttpStatus.NOT_FOUND);
 		}
 		
@@ -72,7 +74,7 @@ public class ReportController {
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@DeleteMapping("/deleteReport/{reportId}")
-	public ResponseEntity<Report> deleteReport(@PathVariable("reportId")Integer reportId){
+	public ResponseEntity<Report> deleteReport(@PathVariable("reportId")Integer reportId)throws ReportIdNotFoundException{
 		Report report=rs.removeReport(reportId);
 		if(report==null) {
 			return new ResponseEntity("Sorry! report not found!", 
@@ -80,5 +82,16 @@ public class ReportController {
 		}
 		
 		return new ResponseEntity<Report>(report, HttpStatus.OK);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@GetMapping("/getAllSpect")
+	public ResponseEntity<List<Spectacles>> getAllSpect(){
+		List<Spectacles> spect= rs.viewSpectacles();
+		if(spect.isEmpty()) {
+			return new ResponseEntity("Sorry! spectacles not found!", 
+					HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Spectacles>>(spect, HttpStatus.OK);
 	}
 }

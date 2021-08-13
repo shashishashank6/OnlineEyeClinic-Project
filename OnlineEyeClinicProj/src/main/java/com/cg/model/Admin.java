@@ -37,7 +37,7 @@ String adminPassword;
 		this.adminPassword = adminPassword;
 	}
 	public Admin(int adminId, String adminUserName, String adminPassword) {
-		super();
+		//super();
 		this.adminId = adminId;
 		this.adminUserName = adminUserName;
 		this.adminPassword = adminPassword;
@@ -45,4 +45,9 @@ String adminPassword;
 public Admin() {
 	
 }
+@Override
+public String toString() {
+	return "Admin [adminId=" + adminId + ", adminUserName=" + adminUserName + ", adminPassword=" + adminPassword + "]";
+}
+
 }

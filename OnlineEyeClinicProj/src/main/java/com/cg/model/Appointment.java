@@ -25,9 +25,8 @@ public class Appointment {
 	@SequenceGenerator(name="appoint_seq",sequenceName="appoint_seq",allocationSize=1)
 	@Column(name="appointment_Id")
 private int appointmentId;
-	@JsonFormat(pattern="dd-MMM-yyyy")
-	@Temporal(TemporalType.DATE)
-	@Column(name="date_Of_Appointment",columnDefinition = "DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
+	@Column(name="date_Of_Appointment")
 private Date dateOfAppointment;
 	@Column(name="time_Of_Appointment")
 private String timeOfAppointment;
