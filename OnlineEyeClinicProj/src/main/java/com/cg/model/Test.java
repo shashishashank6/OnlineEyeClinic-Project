@@ -1,5 +1,6 @@
 package com.cg.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Test {
@@ -22,10 +26,20 @@ private String testName;
 	@Column(name="test_Cost")
 private double testCost;
 	@Column(name="test_Description")
-private String testDescriprion;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="doctor_Id",insertable = false,updatable=false)
+private String testDescription;
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name="doctor_Id")
+	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@ManyToOne//(cascade=CascadeType.ALL)
+	@JoinColumn(name="doctor_Id")
 private Doctor doctor;
+	
+	public Doctor getDoctor() {
+		return doctor;
+				}
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
 	public int getTestId() {
 		return testId;
 	}
@@ -44,18 +58,19 @@ private Doctor doctor;
 	public void setTestCost(double testCost) {
 		this.testCost = testCost;
 	}
-	public String getTestDescriprion() {
-		return testDescriprion;
+	public String getTestDescription() {
+		return testDescription;
 	}
-	public void setTestDescriprion(String testDescriprion) {
-		this.testDescriprion = testDescriprion;
+	public void setTestDescription(String testDescription) {
+		this.testDescription = testDescription;
 	}
-	public Test(int testId, String testName, double testCost, String testDescriprion) {
+	public Test(int testId, String testName, double testCost, String testDescription,Doctor doctor) {
 		super();
 		this.testId = testId;
 		this.testName = testName;
 		this.testCost = testCost;
-		this.testDescriprion = testDescriprion;
+		this.testDescription = testDescription;
+		this.doctor=doctor;
 	}
 public Test() {
 	

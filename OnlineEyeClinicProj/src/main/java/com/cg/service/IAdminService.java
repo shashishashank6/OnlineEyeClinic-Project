@@ -2,24 +2,29 @@ package com.cg.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.cg.Exceptions.AdminIdNotFoundException;
+import com.cg.Exceptions.NameNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
-import com.cg.model.Admin;
+import com.cg.model.AdminEntity;
 
 @Service
 public interface IAdminService {
 //add admin
-public Admin addAdmin(Admin admin) throws UserNameAlreadyExistException;
+public AdminEntity addAdmin(AdminEntity admin) throws UserNameAlreadyExistException;
 //view list of admin usernames
 public List<String> getAdmins();
 //view all admins
-public List<Admin> viewAllAdmins();
+public List<AdminEntity> viewAllAdmins();
 //remove admin
-public Admin removeAdmin(int adminId) throws AdminIdNotFoundException;
+public AdminEntity removeAdmin(int adminId) throws AdminIdNotFoundException;
 //update admin
-public Admin updateAdmin(Admin admin);
+public AdminEntity updateAdmin(AdminEntity admin);
 //view admin by individual id
-public Admin viewAdmin(int adminId) throws AdminIdNotFoundException;
+public AdminEntity viewAdmin(int adminId) throws AdminIdNotFoundException;
+//by name
+public AdminEntity byUserName(String userName) throws NameNotFoundException; 
+public AdminEntity checkLogin(String username,String password);
 }

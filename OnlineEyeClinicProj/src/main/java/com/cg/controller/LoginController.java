@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cg.model.Admin;
+import com.cg.model.AdminEntity;
 import com.cg.model.Doctor;
 import com.cg.model.Patient;
 import com.cg.service.ILoginService;
@@ -20,7 +19,7 @@ public class LoginController {
 	@Autowired
 private ILoginService ls;
 	@GetMapping("/admin")
-	public ResponseEntity<String> adminLogin(@RequestBody Admin admin)
+	public ResponseEntity<String> adminLogin(@RequestBody AdminEntity admin)
 	{
 		return new ResponseEntity<String>(ls.adminLogin(admin.getAdminUserName(),admin.getAdminPassword()),HttpStatus.OK);
 	}

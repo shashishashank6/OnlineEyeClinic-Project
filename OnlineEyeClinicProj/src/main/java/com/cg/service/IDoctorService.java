@@ -8,6 +8,8 @@ import com.cg.Exceptions.DoctorIdNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.model.Appointment;
 import com.cg.model.Doctor;
+import com.cg.model.Patient;
+//import com.cg.model.Test;
 import com.cg.model.Test;
 
 @Service
@@ -24,5 +26,7 @@ public interface IDoctorService {
 	public Doctor viewDoctor(int doctorId)throws DoctorIdNotFoundException;
 	//view all appointments by doctor
 	public List<Appointment> viewAllAppointmentsByDoctorId(int doctorId)throws DoctorIdNotFoundException;
-	public void createTest(Doctor doctor);
+	//public Doctor createTest(Doctor doctor);
+	//public void addTest(Doctor doctor);
+
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+//import javax.persistence.EntityManager;
+//import javax.persistence.PersistenceContext;
+//import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import com.cg.Exceptions.DoctorIdNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.dao.IAppointmentRepo;
 import com.cg.dao.IDoctorRepo;
-import com.cg.dao.ITestRepo;
+//import com.cg.dao.ITestRepo;
 import com.cg.model.Appointment;
 import com.cg.model.Doctor;
 import com.cg.model.Test;
@@ -30,8 +30,8 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	private IAppointmentRepo appointRepo;
 	
-	@Autowired
-	private ITestRepo testRepo;
+	//@Autowired
+	//private ITestRepo testRepo;
 
 	@Override
 	public List<Doctor> viewAllDoctors() {
@@ -84,14 +84,16 @@ public class DoctorServiceImpl implements IDoctorService {
 		return appointRepo.findAllAppointmentByDoctorId(doctorId);
 	}
 
-	@Override
-	public void createTest(Doctor doctor) {
+	//@Override
+	/*public Doctor createTest(Doctor doctor) {
+		// TODO Auto-generated method stub
+	    return doctorRepo.saveAndFlush(doctor);
+	}*/
+	/*@Override
+	public void addTest(Doctor doctor) {
 		// TODO Auto-generated method stub
 		List<Test> t=new ArrayList<>();
 	    doctor.setTest(t);
 		
-	}
-
-	
-	
+	}*/
 }

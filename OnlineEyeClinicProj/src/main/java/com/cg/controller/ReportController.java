@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.Exceptions.ReportIdNotFoundException;
-import com.cg.model.Doctor;
+//import com.cg.model.Doctor;
 import com.cg.model.Report;
 import com.cg.model.Spectacles;
-import com.cg.model.Test;
+//import com.cg.model.Test;
 import com.cg.service.IReportService;
 
 @RestController
@@ -39,15 +39,10 @@ public class ReportController {
 		
 		return new ResponseEntity<Report>(reports, HttpStatus.OK);
 	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	
 	@GetMapping("/reports/{reportId}")
 	public ResponseEntity<Report> findReport(@PathVariable("reportId")Integer reportId)throws ReportIdNotFoundException{
 		Report report=rs.viewReport(reportId);
-		if(report==null) {
-			return new ResponseEntity("Sorry! report not found!", 
-					HttpStatus.NOT_FOUND);
-		}
-		
 		return new ResponseEntity<Report>(report, HttpStatus.OK);
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -72,15 +67,10 @@ public class ReportController {
 		
 		return new ResponseEntity<Report>(reports, HttpStatus.OK);
 	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	
 	@DeleteMapping("/deleteReport/{reportId}")
 	public ResponseEntity<Report> deleteReport(@PathVariable("reportId")Integer reportId)throws ReportIdNotFoundException{
-		Report report=rs.removeReport(reportId);
-		if(report==null) {
-			return new ResponseEntity("Sorry! report not found!", 
-					HttpStatus.NOT_FOUND);
-		}
-		
+		Report report=rs.removeReport(reportId);	
 		return new ResponseEntity<Report>(report, HttpStatus.OK);
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })

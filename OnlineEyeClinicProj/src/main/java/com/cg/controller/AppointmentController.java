@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.Exceptions.AppointmentIdNotFoundException;
 import com.cg.model.Appointment;
-import com.cg.model.Patient;
+//import com.cg.model.Patient;
 import com.cg.service.IAppointmentService;
-import com.fasterxml.jackson.annotation.JsonFormat;
+//import com.fasterxml.jackson.annotation.JsonFormat;
 
 @RestController
 @RequestMapping("appointment/api/v1")
@@ -49,7 +49,7 @@ public class AppointmentController {
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@GetMapping("/appointments/id/{appointmentId}")
+	@GetMapping("/appointments/{appointmentId}")
 	public ResponseEntity<Appointment> viewAppointment(@PathVariable("appointmentId") Integer appointmentId)throws AppointmentIdNotFoundException{
 		Appointment appointment= as.viewAppointment(appointmentId);
 		if(appointment==null) {

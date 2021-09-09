@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.Exceptions.UserNameAlreadyExistException;
-import com.cg.model.Admin;
+import com.cg.model.AdminEntity;
 import com.cg.model.Doctor;
 import com.cg.model.Patient;
 
@@ -32,7 +32,7 @@ public class RegistrationServiceImpl implements IRegistrationService {
 	}
 
 	@Override
-	public Admin registerAdmin(Admin admin)throws UserNameAlreadyExistException {
+	public AdminEntity registerAdmin(AdminEntity admin)throws UserNameAlreadyExistException {
 		// TODO Auto-generated method stub
 		return adminService.addAdmin(admin);
 	}

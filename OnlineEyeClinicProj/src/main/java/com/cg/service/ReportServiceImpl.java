@@ -1,6 +1,6 @@
 package com.cg.service;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.Exceptions.ReportIdNotFoundException;
-import com.cg.dao.IPatientRepo;
+//import com.cg.dao.IPatientRepo;
 import com.cg.dao.IReportRepo;
 import com.cg.dao.ISpectaclesRepo;
-import com.cg.dao.ITestRepo;
-import com.cg.model.Patient;
+//import com.cg.dao.ITestRepo;
+//import com.cg.model.Patient;
 import com.cg.model.Report;
 import com.cg.model.Spectacles;
-import com.cg.model.Test;
+//import com.cg.model.Test;
 
 @Service
 public class ReportServiceImpl implements IReportService {

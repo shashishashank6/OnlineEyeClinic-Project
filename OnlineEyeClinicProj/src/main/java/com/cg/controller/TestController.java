@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.Exceptions.DoctorIdNotFoundException;
 import com.cg.Exceptions.TestIdNotFoundException;
-import com.cg.model.Appointment;
+//import com.cg.model.Appointment;
 import com.cg.model.Test;
 import com.cg.service.ITestService;
 

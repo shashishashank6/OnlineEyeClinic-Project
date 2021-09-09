@@ -1,17 +1,22 @@
 package com.cg.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,17 +44,13 @@ private String doctorAddress;
 @OneToMany(targetEntity =Appointment.class)
 @JoinColumn(name="doctor_Id")
 private List<Appointment> appointment=new ArrayList<>();
-@OneToMany(targetEntity =Test.class,cascade=CascadeType.MERGE)
-@JoinColumn(name="doctor_Id",nullable = false, updatable = false)
-private List<Test> test;
+//@OneToMany(cascade=CascadeType.ALL,mappedBy = "doctor", fetch = FetchType.EAGER)
+//@OneToMany(targetEntity=Test.class)
+//@OneToMany(targetEntity =Test.class,cascade=CascadeType.ALL)
 
+//@JoinColumn(name="doctor_Id",updatable=false,insertable=true,nullable=false)
+//private List<Test> test=new ArrayList<Test>();
 
-public List<Test> getTest() {
-	return test;
-}
-public void setTest(List<Test> test) {
-	this.test = test;
-}
 public void setAppointment(List<Appointment> appointment) {
 	this.appointment = appointment;
 }
@@ -101,7 +102,11 @@ public String getDoctorAddress() {
 public void setDoctorAddress(String doctorAddress) {
 	this.doctorAddress = doctorAddress;
 }
-
+/*
+@JsonIgnore
+public List<Test> getTest() {
+	return test;
+}*/
 @JsonIgnore
 public List<Appointment> getAppointment() {
 	return appointment;
@@ -109,6 +114,7 @@ public List<Appointment> getAppointment() {
 /*public void setAppointment(List<Appointment> appointment) {
 	this.appointment = appointment;
 }*/
+
 public Doctor(int doctorId, String doctorName, String doctorConsultationTime, long doctorMobile, String doctorEmail,
 		String doctorUserName, String doctorPassword, String doctorAddress) {
 	super();
@@ -121,6 +127,8 @@ public Doctor(int doctorId, String doctorName, String doctorConsultationTime, lo
 	this.doctorPassword = doctorPassword;
 	this.doctorAddress = doctorAddress;
 }
+
+
 public Doctor() {
 	
 }

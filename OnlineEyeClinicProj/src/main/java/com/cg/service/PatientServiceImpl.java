@@ -1,14 +1,14 @@
 package com.cg.service;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
+//import javax.persistence.EntityManager;
+//import javax.persistence.PersistenceContext;
+//import javax.persistence.TypedQuery;
+//import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +71,7 @@ public class PatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public Patient updatePatient(Patient patient) {
 		// TODO Auto-generated method stub
 		return patientRepo.saveAndFlush(patient);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.model.Appointment;
 import com.cg.model.Doctor;
 import com.cg.model.Patient;
+import com.cg.model.Test;
+//import com.cg.model.Patient;
 import com.cg.service.IDoctorService;
 
 @RestController
@@ -27,6 +30,7 @@ public class DoctorController {
 
 	@Autowired
 	private IDoctorService ds;
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping("/doctors")
 	public ResponseEntity<List<Doctor>> getAllDoctor(){
@@ -49,6 +53,8 @@ public class DoctorController {
 			
 			return new ResponseEntity<Doctor>(doctors, HttpStatus.OK);
 		}
+	
+	
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 		@PutMapping("/doctors")
 		public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor){
@@ -60,6 +66,8 @@ public class DoctorController {
 			
 			return new ResponseEntity<Doctor>(doctors, HttpStatus.OK);
 		}
+	
+	 
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 		@GetMapping("/doctors/{doctorId}")
 		public ResponseEntity<Doctor> findDoctor(@PathVariable("doctorId")Integer doctorId)throws DoctorIdNotFoundException{
@@ -71,6 +79,7 @@ public class DoctorController {
 			
 			return new ResponseEntity<Doctor>(doctor, HttpStatus.OK);
 		}
+	
 	 @SuppressWarnings({ "rawtypes", "unchecked" })
 	    @DeleteMapping("/doctors/{doctorId}")
 		public ResponseEntity<Doctor> deleteDoctor(
@@ -94,10 +103,12 @@ public class DoctorController {
 			
 			return new ResponseEntity<List<Appointment>>(appoint, HttpStatus.OK);
 		}
-	 //@SuppressWarnings({ "rawtypes", "unchecked" })
-		@PostMapping("/createTest")
-		public void InsertTest(@RequestBody Doctor doctor){
-			 ds.createTest(doctor);
-			
+	
+		/*public ResponseEntity<Doctor> InsertTest(@RequestBody Doctor doctor){
+		Doctor doctorTest= ds.createTest(doctor);
+		if(doctorTest==null) {
+			return new ResponseEntity<Doctor>(HttpStatus.NOT_FOUND);
 		}
+		  return new ResponseEntity<Doctor>(doctorTest,HttpStatus.OK);	
+		}*/
 }

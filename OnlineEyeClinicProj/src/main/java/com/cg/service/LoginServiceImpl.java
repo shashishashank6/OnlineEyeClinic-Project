@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.cg.model.Admin;
+import com.cg.model.AdminEntity;
 import com.cg.model.Doctor;
 import com.cg.model.Patient;
 
@@ -24,8 +23,8 @@ public class LoginServiceImpl implements ILoginService{
 	public String adminLogin(String username, String password) {
 		// TODO Auto-generated method stub
 		String detail=null;
-		List<Admin> admins=adminService.viewAllAdmins();
-		for(Admin admin:admins)
+		List<AdminEntity> admins=adminService.viewAllAdmins();
+		for(AdminEntity admin:admins)
 		{
 			if(admin.getAdminUserName().equals(username) && admin.getAdminPassword().equals(password))
 			{

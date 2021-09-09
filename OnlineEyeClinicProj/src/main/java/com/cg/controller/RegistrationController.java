@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.Exceptions.UserNameAlreadyExistException;
-import com.cg.model.Admin;
+import com.cg.model.AdminEntity;
 import com.cg.model.Doctor;
 import com.cg.model.Patient;
 import com.cg.service.IRegistrationService;
@@ -33,8 +33,8 @@ public class RegistrationController {
 	}
 	
 	@PostMapping("/admin")
-	public ResponseEntity<Admin> registerAdmin(@RequestBody Admin admin) throws UserNameAlreadyExistException
+	public ResponseEntity<AdminEntity> registerAdmin(@RequestBody AdminEntity admin) throws UserNameAlreadyExistException
 	{
-		return new ResponseEntity<Admin>(rs.registerAdmin(admin),HttpStatus.ACCEPTED);
+		return new ResponseEntity<AdminEntity>(rs.registerAdmin(admin),HttpStatus.ACCEPTED);
 	}
 }

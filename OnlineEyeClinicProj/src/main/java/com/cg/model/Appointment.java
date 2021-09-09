@@ -2,6 +2,7 @@ package com.cg.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+//import javax.persistence.Temporal;
+//import javax.persistence.TemporalType;
 
 //import org.springframework.data.jpa.repository.Temporal;
 
@@ -35,8 +36,8 @@ private double consultationFee;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="doctor_Id")
 	private Doctor doctor;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="patient_Id",insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name="patient_Id")
 	private Patient patient;
 	public int getAppointmentId() {
 		return appointmentId;
@@ -61,6 +62,15 @@ private double consultationFee;
 	}
 	public void setConsultationFee(double consultationFee) {
 		this.consultationFee = consultationFee;
+	}
+	
+	
+
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 	public Appointment(int appointmentId, Date dateOfAppointment, String timeOfAppointment, double consultationFee) {
 		super();

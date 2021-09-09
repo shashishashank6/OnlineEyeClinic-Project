@@ -1,27 +1,31 @@
 package com.cg.model;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
+//import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+//import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Patient {
@@ -30,10 +34,14 @@ public class Patient {
 @SequenceGenerator(name="patient_seq",sequenceName="patient_seq",allocationSize=1)
 @Column(name="patient_Id")
 private int patientId;
+@Size(min=2,max =50 ,message="Name should have atleast 2 characters and max to max 50 characters ")
 @Column(name="patient_Name")
 private String patientName;
+@Min(value = 0, message = "Age should not be less than 0")
+@Max(value = 100, message = "Age should not be greater than 100")
 @Column(name="patient_Age")
 private int patientAge;
+@Pattern(regexp="^[6-9][0-9]{9}$",message="please enter valid mobile number") 
 @Column(name="patient_Mobile")
 private long patientMobile;
 @Column(name="patient_Email")
@@ -47,9 +55,9 @@ private String patientUserName;
 private String patientPassword;
 @Column(name="patient_Address")
 private String patientAddress;
-@OneToMany(targetEntity=Appointment.class,cascade=CascadeType.ALL)
-@JoinColumn(name="patient_Id",nullable = false, updatable = false)
-private List<Appointment> appointment;
+//@OneToMany(targetEntity=Appointment.class,cascade=CascadeType.ALL)
+//@JoinColumn(name="patient_Id",nullable = false, updatable = false)
+//private List<Appointment> appointment;
 public int getPatientId() {
 	return patientId;
 }
@@ -105,14 +113,14 @@ public String getPatientAddress() {
 public void setPatientAddress(String patientAddress) {
 	this.patientAddress = patientAddress;
 }
-
+/*
 public List<Appointment> getAppointment() {
 	return appointment;
 }
 public void setAppointment(List<Appointment> appointment) {
 	this.appointment = appointment;
 }
-
+*/
 public Patient(int patientId, String patientName, int patientAge, long patientMobile, String patientEmail,
 		Date patientDOB, String patientUserName, String patientPassword, String patientAddress) {
 	super();
@@ -127,16 +135,7 @@ public Patient(int patientId, String patientName, int patientAge, long patientMo
 	this.patientAddress = patientAddress;
 	//this.appointment=appointment;
 }
-public Patient(int patientId, String patientName, int patientAge, long patientMobile, String patientEmail
-		,String patientAddress) {
-	super();
-	this.patientId = patientId;
-	this.patientName = patientName;
-	this.patientAge = patientAge;
-	this.patientMobile = patientMobile;
-	this.patientEmail = patientEmail;
-	this.patientAddress = patientAddress;
-}
+
 
 public Patient() {
 	
