@@ -5,9 +5,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cg.Exceptions.DoctorIdNotFoundException;
+import com.cg.Exceptions.PatientIdNotFoundException;
 import com.cg.Exceptions.ReportIdNotFoundException;
+import com.cg.Exceptions.TestIdNotFoundException;
 import com.cg.model.Report;
 import com.cg.model.Spectacles;
+import com.cg.model.Test;
 
 @Service
 public interface IReportService {
@@ -23,4 +27,7 @@ public interface IReportService {
     public List<Report> viewReportsByDate(Date date);
     //viewing all spectacles
     public List<Spectacles> viewSpectacles();
+    public List<Report> getAllReports();
+    public List<Report> viewReportByTest(int testId)throws TestIdNotFoundException;
+    public List<Report> viewReportByPatient(int patientId) throws PatientIdNotFoundException;
 }

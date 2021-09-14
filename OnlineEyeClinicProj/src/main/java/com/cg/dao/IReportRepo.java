@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cg.model.Report;
+import com.cg.model.Test;
 
 @Repository
 public interface IReportRepo extends JpaRepository<Report,Integer> {
@@ -15,6 +16,9 @@ public interface IReportRepo extends JpaRepository<Report,Integer> {
 	public List<Report> findReportsByDate(Date date);
 	@Query("from Report where patient.patientId=?1")
 	public List<Report> findReportByPatient(int patientId);
+	
+	@Query("from Report where test.testId=?1")
+	public List<Report> getReportByTest(int testId);
 	
 	
 }

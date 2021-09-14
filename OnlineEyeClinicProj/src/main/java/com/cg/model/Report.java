@@ -2,6 +2,7 @@ package com.cg.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ private String visualAcuityForDistance;
 	@OneToOne
 	@JoinColumn(name="patient_Id")
 private Patient patient;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="test_Id")
 private Test test;
 	

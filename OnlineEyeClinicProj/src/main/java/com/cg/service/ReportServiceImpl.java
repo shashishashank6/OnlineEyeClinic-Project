@@ -8,7 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.Exceptions.PatientIdNotFoundException;
 import com.cg.Exceptions.ReportIdNotFoundException;
+import com.cg.Exceptions.TestIdNotFoundException;
 //import com.cg.dao.IPatientRepo;
 import com.cg.dao.IReportRepo;
 import com.cg.dao.ISpectaclesRepo;
@@ -68,6 +70,24 @@ public class ReportServiceImpl implements IReportService {
 	public List<Spectacles> viewSpectacles() {
 		// TODO Auto-generated method stub
 		return spectRepo.findAll();
+	}
+
+	@Override
+	public List<Report> getAllReports() {
+		// TODO Auto-generated method stub
+		return reportRepo.findAll();
+	}
+
+	@Override
+	public List<Report> viewReportByTest(int testId) throws TestIdNotFoundException {
+		// TODO Auto-generated method stub
+		return reportRepo.getReportByTest(testId);
+	}
+
+	@Override
+	public List<Report> viewReportByPatient(int patientId) throws PatientIdNotFoundException {
+		// TODO Auto-generated method stub
+		return reportRepo.findReportByPatient(patientId);
 	}
 	
 }

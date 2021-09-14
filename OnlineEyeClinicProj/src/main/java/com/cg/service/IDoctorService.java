@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cg.Exceptions.DoctorIdNotFoundException;
+import com.cg.Exceptions.NameNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.model.Appointment;
 import com.cg.model.Doctor;
@@ -28,5 +29,6 @@ public interface IDoctorService {
 	public List<Appointment> viewAllAppointmentsByDoctorId(int doctorId)throws DoctorIdNotFoundException;
 	//public Doctor createTest(Doctor doctor);
 	//public void addTest(Doctor doctor);
-
+	public Doctor byUserName(String userName) throws NameNotFoundException; 
+	public Doctor checkLogin(String username,String password);
 }

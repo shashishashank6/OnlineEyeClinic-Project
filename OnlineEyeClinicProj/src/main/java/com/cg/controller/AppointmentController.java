@@ -84,7 +84,7 @@ public class AppointmentController {
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@GetMapping("/appointments/{date}")
+	@GetMapping("/appointment-date/{date}")
 	public ResponseEntity<List<Appointment>> viewAppointmentByDate(@PathVariable("date")Date date){
 		List<Appointment> appointment= as.viewAppointments(date);
 		if(appointment.isEmpty()) {

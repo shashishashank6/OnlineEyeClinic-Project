@@ -33,7 +33,7 @@ private Date dateOfAppointment;
 private String timeOfAppointment;
 	@Column(name="consultation_Fee")
 private double consultationFee;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="doctor_Id")
 	private Doctor doctor;
 	@ManyToOne
@@ -71,6 +71,14 @@ private double consultationFee;
 	}
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+	
+	
+	public Doctor getDoctor() {
+		return doctor;
+	}
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 	public Appointment(int appointmentId, Date dateOfAppointment, String timeOfAppointment, double consultationFee) {
 		super();

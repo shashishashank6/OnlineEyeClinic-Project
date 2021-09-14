@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cg.Exceptions.NameNotFoundException;
 import com.cg.Exceptions.PatientIdNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
+import com.cg.model.AdminEntity;
 import com.cg.model.Appointment;
 //import com.cg.model.Appointment;
 import com.cg.model.Patient;
@@ -29,4 +31,6 @@ public interface IPatientService{
 	public List<Appointment> viewAppointmentsByPatient(int patientId)throws PatientIdNotFoundException;
 	//viewing report by patient
 	public List<Report> viewReportsByPatient(int patientId)throws PatientIdNotFoundException;
+	public Patient byUserName(String userName) throws NameNotFoundException; 
+	public Patient checkLogin(String username,String password);
 }

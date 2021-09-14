@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.Exceptions.NameNotFoundException;
 import com.cg.Exceptions.PatientIdNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.dao.IAppointmentRepo;
@@ -97,5 +98,17 @@ public class PatientServiceImpl implements IPatientService {
 	public List<Report> viewReportsByPatient(int patientId)throws PatientIdNotFoundException{
 		// TODO Auto-generated method stub
 		return reportRepo.findReportByPatient(patientId); 
+	}
+
+	@Override
+	public Patient byUserName(String userName) throws NameNotFoundException {
+		// TODO Auto-generated method stub
+		return patientRepo.findByPatientUserName(userName);
+	}
+
+	@Override
+	public Patient checkLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		return patientRepo.checkLogin(username, password);
 	}	
 }

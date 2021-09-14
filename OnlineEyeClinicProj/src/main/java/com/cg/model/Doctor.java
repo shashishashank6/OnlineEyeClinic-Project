@@ -41,19 +41,19 @@ private String doctorUserName;
 private String doctorPassword;
 @Column(name="doctor_Address")
 private String doctorAddress;
-@OneToMany(targetEntity =Appointment.class)
-@JoinColumn(name="doctor_Id")
-private List<Appointment> appointment=new ArrayList<>();
+//@OneToMany(targetEntity =Appointment.class)
+//@JoinColumn(name="doctor_Id")
+//private List<Appointment> appointment=new ArrayList<>();
 //@OneToMany(cascade=CascadeType.ALL,mappedBy = "doctor", fetch = FetchType.EAGER)
 //@OneToMany(targetEntity=Test.class)
 //@OneToMany(targetEntity =Test.class,cascade=CascadeType.ALL)
 
 //@JoinColumn(name="doctor_Id",updatable=false,insertable=true,nullable=false)
 //private List<Test> test=new ArrayList<Test>();
-
+/*
 public void setAppointment(List<Appointment> appointment) {
 	this.appointment = appointment;
-}
+}*/
 public int getDoctorId() {
 	return doctorId;
 }
@@ -107,10 +107,12 @@ public void setDoctorAddress(String doctorAddress) {
 public List<Test> getTest() {
 	return test;
 }*/
+/*
 @JsonIgnore
 public List<Appointment> getAppointment() {
 	return appointment;
 }
+*/
 /*public void setAppointment(List<Appointment> appointment) {
 	this.appointment = appointment;
 }*/

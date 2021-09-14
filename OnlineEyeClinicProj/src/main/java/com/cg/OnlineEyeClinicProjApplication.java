@@ -21,7 +21,8 @@ import java.util.Arrays;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.cg"})
+@ComponentScan(basePackages="com.cg")
+
 public class OnlineEyeClinicProjApplication {
 
 	 
@@ -29,7 +30,7 @@ public class OnlineEyeClinicProjApplication {
 		
 		SpringApplication.run(OnlineEyeClinicProjApplication.class, args);
 		final Logger logger=LoggerFactory.getLogger(OnlineEyeClinicProjApplication.class);
-		logger.info("application started");
+		logger.info("application started"); 
 	}
 	@Bean
 	public CorsFilter corsFilter() {

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.Exceptions.DoctorIdNotFoundException;
+import com.cg.Exceptions.NameNotFoundException;
 import com.cg.Exceptions.UserNameAlreadyExistException;
 import com.cg.dao.IAppointmentRepo;
 import com.cg.dao.IDoctorRepo;
@@ -82,6 +83,18 @@ public class DoctorServiceImpl implements IDoctorService {
 		// TODO Auto-generated method stub
 		
 		return appointRepo.findAllAppointmentByDoctorId(doctorId);
+	}
+
+	@Override
+	public Doctor byUserName(String userName) throws NameNotFoundException {
+		// TODO Auto-generated method stub
+		return doctorRepo.findByDoctorUserName(userName);
+	}
+
+	@Override
+	public Doctor checkLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		return doctorRepo.checkLogin(username, password);
 	}
 
 	//@Override

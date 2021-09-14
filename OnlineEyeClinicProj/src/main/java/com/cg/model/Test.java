@@ -30,7 +30,7 @@ private String testDescription;
 	//@ManyToOne(fetch = FetchType.LAZY)
 	//@JoinColumn(name="doctor_Id")
 	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@ManyToOne//(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="doctor_Id")
 private Doctor doctor;
 	

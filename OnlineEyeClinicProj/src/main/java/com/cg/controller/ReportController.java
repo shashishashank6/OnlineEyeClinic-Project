@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.Exceptions.PatientIdNotFoundException;
 import com.cg.Exceptions.ReportIdNotFoundException;
+import com.cg.Exceptions.TestIdNotFoundException;
 //import com.cg.model.Doctor;
 import com.cg.model.Report;
 import com.cg.model.Spectacles;
@@ -83,5 +85,38 @@ public class ReportController {
 		}
 		
 		return new ResponseEntity<List<Spectacles>>(spect, HttpStatus.OK);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@GetMapping("/allReports")
+	public ResponseEntity<List<Report>> getAllReports(){
+		List<Report> report= rs.getAllReports();
+		if(report.isEmpty()) {
+			return new ResponseEntity("Sorry! reports not found!", 
+					HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Report>>(report, HttpStatus.OK);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@GetMapping("/testReport/{testId}")
+	public ResponseEntity<List<Report>> getTestReport(@PathVariable("testId")Integer testId) throws TestIdNotFoundException{
+		List<Report> report= rs.viewReportByTest(testId);
+		if(report.isEmpty()) {
+			return new ResponseEntity("Sorry! reports not found!", 
+					HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Report>>(report, HttpStatus.OK);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@GetMapping("/patientReport/{patientId}")
+	public ResponseEntity<List<Report>> getPatientReport(@PathVariable("patientId")Integer patientId) throws PatientIdNotFoundException{
+		List<Report> report= rs.viewReportByPatient(patientId);
+		if(report.isEmpty()) {
+			return new ResponseEntity("Sorry! reports not found!", 
+					HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Report>>(report, HttpStatus.OK);
 	}
 }
